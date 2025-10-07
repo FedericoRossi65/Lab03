@@ -72,5 +72,6 @@ def main():
         else:
             print("Opzione non valida!")
 
+
 if __name__ == "__main__":
     main()
