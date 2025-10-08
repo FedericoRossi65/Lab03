@@ -20,7 +20,8 @@ def main():
 
         if scelta == "1":
             nuovo_responsabile = input("Inserisci il nuovo responsabile: ")
-            # TODO: Aggiorna responsabile nel sistema
+            autonoleggio.responsabile= nuovo_responsabile
+            print(f'Il nuovo responsabile è {nuovo_responsabile}')
 
         elif scelta == "2":
             while True:
@@ -60,11 +61,11 @@ def main():
 
         elif scelta == "6":
             id_noleggio = input("ID noleggio da terminare: ")
-            try:
-                autonoleggio.termina_noleggio(id_noleggio)
-                print(f"Noleggio {id_noleggio} terminato con successo.")
-            except Exception as e:
-                print(e)
+
+            messaggio = autonoleggio.termina_noleggio(id_noleggio)
+            print(messaggio)
+
+
 
         elif scelta == "7":
             print("Uscita dal programma...")

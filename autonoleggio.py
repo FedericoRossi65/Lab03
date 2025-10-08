@@ -42,10 +42,7 @@ class Autonoleggio:
 
     def automobili_ordinate_per_marca(self):
         """Ordina le automobili per marca in ordine alfabetico"""
-        lista_nuova = []
-        for a in self.lista_auto:
-            lista_nuova.append(a.marca)
-        return sorted(lista_nuova)
+        return sorted(self.lista_auto, key=lambda x: x.marca)
 
 
 
@@ -64,8 +61,10 @@ class Autonoleggio:
         for automobili in self.auto_noleggiate:
             if automobili.id_noleggio == id_noleggio:
                 self.auto_noleggiate.remove(automobili)  # attenzione devo ancora mdificare questa funzione perchè nel main non mi da errore anche se il codice noleggio non esiste
-                return id_noleggio
-        return None
+                return f'Noleggio di {automobili.id_noleggio} terminato'
+
+        return f'{id_noleggio} non trovato'
+
 
 
 

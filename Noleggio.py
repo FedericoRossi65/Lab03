@@ -5,4 +5,4 @@ class Noleggio:
         self.id_automobile = id_automobile
         self.cognome_cliente = cognome_cliente
     def __str__(self):
-        return f'Dati noleggio: {self.id_noleggio} {self.data} {self.id_automobile} {self.cognome_cliente} '
+        return f'Id noleggio:{self.id_noleggio},Data:{self.data},Id Automobile:{self.id_automobile},Cognome cliente:{self.cognome_cliente}'

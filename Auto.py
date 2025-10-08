@@ -6,4 +6,4 @@ class Auto:
         self.annoImm = annoImm
         self.posti = posti
     def __str__(self):
-        return f'Dati macchina: {self.codiceUnivoco} {self.marca} {self.modello} {self.annoImm} {self.posti}'
+        return f'Codice Univoco:{self.codiceUnivoco},Marca:{self.marca},Modello:{self.modello},Anno di Immatricolazione:{self.annoImm},Numero posti:{self.posti}'
