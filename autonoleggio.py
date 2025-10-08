@@ -2,7 +2,7 @@ import csv
 from Auto import Auto
 from Noleggio import Noleggio
 
-
+# INSERIRE GESTIONE DEGLI ERRORI IN TUTTO IL PROGRAMMA
 class Autonoleggio:
     def __init__(self, nome, responsabile):
         """Inizializza gli attributi e le strutture dati"""
