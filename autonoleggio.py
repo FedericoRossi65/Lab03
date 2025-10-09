@@ -58,42 +58,33 @@ class Autonoleggio:
     def nuovo_noleggio(self, data, id_automobile, cognome_cliente):
         """Crea un nuovo noleggio"""
 
-        auto_trovata = None
+        auto_trovata = None # inizializza l'auto come none e in seguito se è none scaturisce errore
         for a in self.lista_auto:
             if a.codiceUnivoco == id_automobile:
-                auto_trovata = a
+                auto_trovata = a #aggiorno lo stato dell'auto per non scaturire errore se l'auto esiste
                 break
 
         if auto_trovata is None:
-            raise ValueError(f"L'auto con ID {id_automobile} non è presente nel catalogo.")
+            raise ValueError(f"L'auto con ID {id_automobile} non è presente nel catalogo.") # scaturisce errore se l'auto rimane None, cioè se non è nel catalogo
 
-        # verifica che l'auto non sia già noleggiata
+
         for n in self.auto_noleggiate:
-            if n.id_automobile == id_automobile:
-                raise ValueError(f"L'auto con ID {id_automobile} è già noleggiata.")
+            if n.id_automobile == id_automobile:# verifica che l'auto non sia già noleggiata
+                raise ValueError(f"L'auto con ID {id_automobile} è già noleggiata.") # scaturisce errore se l'auto è gia nella lista delle auto noleggiate
 
         # crea il noleggio
-        id_noleggio = f"N{len(self.auto_noleggiate) + 1}"
-        nuovo_noleggio = Noleggio(id_noleggio, data, id_automobile, cognome_cliente)
+        id_noleggio = f"N{len(self.auto_noleggiate) + 1}" # crea il codice di noleggio N1,N2,....
+        nuovo_noleggio = Noleggio(id_noleggio, data, id_automobile, cognome_cliente) # aggiunge l'auto alla lista delle auto noleggiate
         self.auto_noleggiate.append(nuovo_noleggio)
 
-        return f"Noleggio creato con successo! ID: {id_noleggio}"
-
-
-
-
-
-
-
-
-
+        return f"Noleggio creato con successo! ID_noleggio: {id_noleggio}"
 
 
     def termina_noleggio(self, id_noleggio):
         """Termina un noleggio in atto"""
         for automobili in self.auto_noleggiate:
-            if automobili.id_noleggio == id_noleggio:
-                self.auto_noleggiate.remove(automobili)  # attenzione devo ancora mdificare questa funzione perchè nel main non mi da errore anche se il codice noleggio non esiste
+            if automobili.id_noleggio == id_noleggio: # verifica che il noleggio in questione esista
+                self.auto_noleggiate.remove(automobili)
                 return f'Noleggio di {automobili.id_noleggio} terminato'
 
         return f'{id_noleggio} non trovato'
