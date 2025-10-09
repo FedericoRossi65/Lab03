@@ -2,7 +2,7 @@ import csv
 from Auto import Auto
 from Noleggio import Noleggio
 
-# INSERIRE GESTIONE DEGLI ERRORI IN TUTTO IL PROGRAMMA
+
 class Autonoleggio:
     def __init__(self, nome, responsabile):
         """Inizializza gli attributi e le strutture dati"""
@@ -19,9 +19,9 @@ class Autonoleggio:
         """Carica le auto dal file"""
 
         try:
-            with open(file_path, 'r', encoding='utf-8') as infile:
+            with open(file_path, 'r', encoding='utf-8') as infile: # apetura file automobili
                 reader = csv.reader(infile, delimiter=',')
-
+                # inserimento dei dati di automobili nella classe Auto
                 for row in reader:
                     codiceUnivoco =row[0]
                     marca = row[1]
@@ -41,7 +41,7 @@ class Autonoleggio:
     def aggiungi_automobile(self, marca, modello, anno, posti,codiceUnivoco):
         """Aggiunge un'automobile nell'autonoleggio: aggiunge solo nel sistema e non aggiorna il file"""
         for a in self.lista_auto:
-            if a.codiceUnivoco == codiceUnivoco:
+            if a.codiceUnivoco == codiceUnivoco: # verifica del condice univoco per vedere se l'auto è gia presente nel catalogo
 
                 return f' gia presente nel catalogo'
         auto_nuova = Auto(codiceUnivoco, marca, modello, anno, posti)
@@ -57,10 +57,34 @@ class Autonoleggio:
 
     def nuovo_noleggio(self, data, id_automobile, cognome_cliente):
         """Crea un nuovo noleggio"""
-        id_noleggio= f'N{len(self.auto_noleggiate)+1}'
-        nuovo_noleggio = Noleggio(id_noleggio,data,id_automobile,cognome_cliente)
+
+        auto_trovata = None
+        for a in self.lista_auto:
+            if a.codiceUnivoco == id_automobile:
+                auto_trovata = a
+                break
+
+        if auto_trovata is None:
+            raise ValueError(f"L'auto con ID {id_automobile} non è presente nel catalogo.")
+
+        # verifica che l'auto non sia già noleggiata
+        for n in self.auto_noleggiate:
+            if n.id_automobile == id_automobile:
+                raise ValueError(f"L'auto con ID {id_automobile} è già noleggiata.")
+
+        # crea il noleggio
+        id_noleggio = f"N{len(self.auto_noleggiate) + 1}"
+        nuovo_noleggio = Noleggio(id_noleggio, data, id_automobile, cognome_cliente)
         self.auto_noleggiate.append(nuovo_noleggio)
-        return f'ID del noleggio effeuttuato: {id_noleggio}'
+
+        return f"Noleggio creato con successo! ID: {id_noleggio}"
+
+
+
+
+
+
+
 
 
 

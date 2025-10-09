@@ -56,7 +56,7 @@ def main():
             data = datetime.now().date()
             try:
                 noleggio = autonoleggio.nuovo_noleggio(data, id_auto, cognome_cliente)
-                print(f"Noleggio andato a buon fine: {noleggio}")
+                print(f'{noleggio}')
             except Exception as e:
                 print(e)
 
