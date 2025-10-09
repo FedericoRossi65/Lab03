@@ -38,11 +38,12 @@ def main():
             try:
                 anno = int(input("Anno di Immatricolazione: ").strip())
                 posti = int(input("Numero di posti: ").strip())
+                codiceUnivoco = input("CodiceUnivoco: ").strip()
             except ValueError:
                 print("Errore: inserire valori numerici validi per anno, pagine e sezione.")
                 continue
-            automobile = autonoleggio.aggiungi_automobile(marca, modello, anno, posti)
-            print(f"Automobile aggiunta: {automobile}")
+            automobile = autonoleggio.aggiungi_automobile(marca, modello, anno, posti,codiceUnivoco)
+            print(f"Automobile {automobile}")
 
         elif scelta == "4":
             automobili_ordinate = autonoleggio.automobili_ordinate_per_marca()

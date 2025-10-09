@@ -17,28 +17,37 @@ class Autonoleggio:
 
     def carica_file_automobili(self, file_path):
         """Carica le auto dal file"""
-        with open(file_path, 'r', encoding='utf-8') as infile:
-            reader = csv.reader(infile, delimiter=',')
 
-            for row in reader:
-                codiceUnivoco =row[0]
-                marca = row[1]
-                model = row[2]
-                annoImm = row[3]
-                posti = row[4]
-                auto = Auto(codiceUnivoco, marca, model, annoImm, posti)
-                self.lista_auto.append(auto)
-        return self.lista_auto
+        try:
+            with open(file_path, 'r', encoding='utf-8') as infile:
+                reader = csv.reader(infile, delimiter=',')
+
+                for row in reader:
+                    codiceUnivoco =row[0]
+                    marca = row[1]
+                    model = row[2]
+                    annoImm = row[3]
+                    posti = row[4]
+                    auto = Auto(codiceUnivoco, marca, model, annoImm, posti)
+                    self.lista_auto.append(auto)
+                return self.lista_auto
+        except FileNotFoundError:
+            print('File inesistente')
 
 
 
 
 
-    def aggiungi_automobile(self, marca, modello, anno, num_posti):
+    def aggiungi_automobile(self, marca, modello, anno, posti,codiceUnivoco):
         """Aggiunge un'automobile nell'autonoleggio: aggiunge solo nel sistema e non aggiorna il file"""
-        auto_nuova = marca,modello,anno,num_posti
+        for a in self.lista_auto:
+            if a.codiceUnivoco == codiceUnivoco:
+
+                return f' gia presente nel catalogo'
+        auto_nuova = Auto(codiceUnivoco, marca, modello, anno, posti)
         self.lista_auto.append(auto_nuova)
-        return auto_nuova
+        return f' {auto_nuova} aggiunta al catalogo'
+
 
     def automobili_ordinate_per_marca(self):
         """Ordina le automobili per marca in ordine alfabetico"""
